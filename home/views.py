@@ -12,9 +12,9 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.db.models import Q, Sum
 
-from django.contrib.auth import get_user_model
+#from django.contrib.auth import get_user_model
 
-User = get_user_model()
+#User = get_user_model()
 
 @login_required(login_url="/login/")
 def home(request):
