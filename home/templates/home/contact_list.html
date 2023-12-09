@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block start %}
+<a href="/">Home</a>&nbsp;|&nbsp;<a href="/contact/">Contact</a>&nbsp;|&nbsp;<a href="/logout/">Logout</a><br><br><hr>
+
+<form>
+<div class="row g-3 align-items-center">
+  <div class="col-auto">
+    <input type="text" id="search_name" name="search_name" class="form-control" aria-describedby="passwordHelpInline">
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary">Search</button>
+  </div>
+  
+</div>
+</form>
+<hr>
+
+<table class="table table-dark table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Email</th>
+        <th scope="col">Birth Date</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Anniversary</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for contact in contacts %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{contact.name}}</td>
+        <td>{{contact.age}}</td>
+        <td>{{contact.email}}</td>
+        <td>{{contact.dob}}</td>
+        <td>{{contact.mobile}}</td>
+        <td>{{contact.anniversary}}</td>
+        <td>
+            <a href="/delete_contact/{{contact.id}}" class="btn btn-danger">Delete</a>&nbsp;
+            <a href="/update_contact/{{contact.id}}" class="btn btn-info">Edit <i class="bi bi-pencil"></i></a>
+        </td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

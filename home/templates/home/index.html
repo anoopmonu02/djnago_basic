@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block start %}
+    <h2>This is Django App</h2>
+<a href="/about/">Abount</a>&nbsp;|&nbsp;<a href="/contact/">Contact</a>&nbsp;|&nbsp;<a href="/logout/">Logout</a><br><br><hr>
+    <table class="table table-striped table-bordered table-hover">
+        <thead><tr><td>SNo</td><td>Name</td><td>Age</td><td>Can Vote</td></tr></thead>
+        {% for people in peoples%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{people.name}}</td>
+            <td>{{people.age}}</td>
+            <td>
+                {% if people.age >= 18 %}
+                👍
+                {% else %}
+                👎
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor%}
+    </table>
+    
+    
+
+
+    {% endblock %}

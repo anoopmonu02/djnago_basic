@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block start %}
+
+<div class="container mt-5">
+    <h5>Student List</h5><hr>
+    {% if messages %}        
+        <ul class="messages">
+            {% for message in messages %}
+                {% if message.tags == 'error' %}  
+                <div class="alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+                {% endif %}
+                {% if message.tags == 'success' %}  
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+                {% endif %}
+            {% endfor %}
+            
+        </ul>
+        {% endif %}
+        <div class="justify-content-left">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+        
+
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Student ID</th>
+                    <th>Department</th>
+                    <th>Student Name</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in qs %}
+                <tr>
+                    <td scope="row">{{forloop.counter}}</td>
+                    <!--<td><a href="/see_marks/{{student.student_id}}">{{student.student_id}}</a></td>-->
+                    <td><a href="{% url 'see_marks' student.student_id %}">{{student.student_id}}</a></td>
+                    <td>{{student.department.department_name}}</td>
+                    <td>{{student.student_name}}</td>
+                    <td>{{student.student_age}}</td>
+                    <td>{{student.student_email}}</td>
+                    
+                </tr>
+                {% endfor %}                
+            </tbody>
+            <nav aria-label="Page navigation example">
+                
+                  <ul class="pagination justify-content-center">
+                    {% if qs.has_previous %}
+                        <li class="page-item"><a href="?page=1" class="page-link">&laquo; first</a></li>
+                        <li class="page-item"><a href="?page={{ qs.previous_page_number }}" class="page-link" >previous</a></li>
+                    {% endif %}
+                
+                        <span class="current page-link active">
+                            Page {{ qs.number }} of {{ qs.paginator.num_pages }}.
+                        </span>
+                
+                        {% if qs.has_next %}
+                            <li class="page-item"><a href="?page={{ qs.next_page_number }}" class="page-link" >next</a></li>
+                            <li class="page-item"><a href="?page={{ qs.paginator.num_pages }}" class="page-link" >last &raquo;</a></li>
+                        {% endif %}
+                </ul>
+            </nav>
+            
+        </table>
+        
+
+</div>
+
+
+{% endblock %}

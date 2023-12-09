@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block start %}
+
+<div class="container mt-5">
+    <h5>Student Marks</h5><hr>
+    <h6>Student Name: <i>{{qs.first.student}}</i></h6>
+    <h6>Rank: <i><u>{{qs.first.student.studentreportcard.first.rank}}</u></i></h6>
+    <h6>Total: <i><u>{{total_marks.total_marks}}</u></i></h6>
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Subject</th>
+                <th>Marks</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in qs %}
+            <tr>
+                <td scope="row">{{forloop.counter}}</td>
+                <td><b>{{student.subject.subject_name}}</b></td>
+                <td>{{student.marks}}</td>
+               
+                
+            </tr>
+            {% endfor %}                
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

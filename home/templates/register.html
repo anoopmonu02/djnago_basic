@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block start %}
+
+<div class="container mt-5">
+    
+        
+    <form method="post" class="form-horizontal col-6 mx-auto card p-3 shadow-lg" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>Registration Form</h3>
+        <hr>
+        
+        {% if messages %}        
+        <ul class="messages">
+            {% for message in messages %}
+                {% if message.tags == 'warning' %}  
+                <div class="alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+                {% endif %}
+                {% if message.tags == 'success' %}  
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+                {% endif %}
+            {% endfor %}
+            
+        </ul>
+        {% endif %}
+<div class="mb-3 row">
+    <div class="col-auto">
+      <label for="inputPassword6" class="col-form-label">Username</label>
+    </div>
+    <div class="col-auto">
+      <input type="text" id="username" name="username" class="form-control" aria-describedby="passwordHelpInline">
+    </div>
+    
+</div>
+<div class="mb-3 row">
+    <div class="col-auto">
+      <label for="inputPassword6" class="col-form-label">First Name</label>
+    </div>
+    <div class="col-auto">
+      <input type="text" id="first_name" name="first_name" class="form-control" aria-describedby="passwordHelpInline">
+    </div>
+    
+</div>
+<div class="mb-3 row">
+    <div class="col-auto">
+      <label for="inputPassword6" class="col-form-label">Last Name</label>
+    </div>
+    <div class="col-auto">
+      <input type="text" id="last_name" name="last_name" class="form-control" aria-describedby="passwordHelpInline">
+    </div>
+    
+</div>
+<div class="mb-3 row">
+    <div class="col-auto">
+      <label for="inputPassword6" class="col-form-label">Password</label>
+    </div>
+    <div class="col-auto">
+      <input type="password" id="password" name="password" class="form-control" aria-describedby="passwordHelpInline">
+    </div>
+    <div class="col-auto">
+      <span id="passwordHelpInline" class="form-text">
+        Must be 8-20 characters long.
+      </span>
+    </div>
+</div>
+
+<div class="mb-3 row d-grid gap-2 d-md-flex justify-content-md-center">
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Regiser</button>
+    </div>
+    <div class="col-auto">
+        <button type="reset" class="btn btn-info">Reset</button>
+    </div>
+    
+</div>
+<div class="mb-3 row d-grid gap-2 d-md-flex justify-content-md-center">
+    <div class="col-auto">
+        <p>Already have account <a href="/login/">Login</a></p>
+    </div>
+    
+    
+</div>
+</form>
+</div>
+
+{% endblock %}
