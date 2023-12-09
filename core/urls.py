@@ -34,5 +34,7 @@ urlpatterns = [
     path('students/', get_student_data, name='get_student_data'),
     path('see_stu_marks/<student_id>/',see_marks, name='see_marks'),
 
+    path('send_email/', send_email, name='send_email'),
+
     path('admin/', admin.site.urls),
 ]
