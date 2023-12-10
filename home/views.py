@@ -12,14 +12,18 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.db.models import Q, Sum
 import smtplib
-from .utils import send_email_client
+from .utils import *
+from django.conf import settings
 
 #from django.contrib.auth import get_user_model
 
 #User = get_user_model()
 
 def send_email(request):
-    send_email_client()
+    #send_email_client()
+    #if file_path located inside the App directory then
+    #file_path = f"{settings.BASE_DIR}/concatinated_path_of_file"
+    send_email_with_attachment("TEST EMAIL SEND FROM DJANGO", "Mail received using django with attachment",['anoopmonu02@gmail.com'],'C:\\Softwares\\app.py')
     return redirect('/')
 
 @login_required(login_url="/login/")
