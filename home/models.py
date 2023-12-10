@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from .utils import *
 #from django.contrib.auth import get_user_model
 
 #User = get_user_model()
@@ -91,3 +94,20 @@ class ReportCard(models.Model):
 
     class Meta:
         unique_together = ['rank','date_of_report_card_generation']
+
+
+class Car(models.Model):
+    car_name = models.CharField(max_length=255)
+    m_year = models.IntegerField()
+
+    def __str__(self) -> str:
+        return self.car_name
+    
+@receiver(post_save, sender=Car)
+def call_car_api(sender, instance, **kwargs):
+    print("Car Object Created.. Mail send")
+    subject="Car Object Created"
+    message="Car Object Created"
+    fromEmail = settings.EMAIL_HOST_USER
+    to_list = ['anoopmonu02@gmail.com']
+    send_email_client(subject, message, fromEmail, to_list)

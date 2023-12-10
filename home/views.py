@@ -1,4 +1,5 @@
 import datetime
+import random
 from django.shortcuts import render, redirect
 
 from django.http import HttpResponse
@@ -20,7 +21,12 @@ from django.conf import settings
 #User = get_user_model()
 
 def send_email(request):
-    #send_email_client()
+    #send_email_client(subject, message, fromEmail, to_list)
+    """ subject="TEST EMAIL"
+    message="Test EMAIL"
+    fromEmail = settings.EMAIL_HOST_USER
+    to_list = ['anoopmonu02@gmail.com'] """
+
     #if file_path located inside the App directory then
     #file_path = f"{settings.BASE_DIR}/concatinated_path_of_file"
     send_email_with_attachment("TEST EMAIL SEND FROM DJANGO", "Mail received using django with attachment",['anoopmonu02@gmail.com'],'C:\\Softwares\\app.py')
@@ -28,6 +34,12 @@ def send_email(request):
 
 @login_required(login_url="/login/")
 def home(request):
+
+    Car.objects.create(
+        car_name = f"Tata-{random.randint(0,100)}",
+        m_year = 2023
+        )
+
     peoples = [
         {'name':'Anoop Kr Chaudhary', 'age':40},
         {'name':'MJ','age':35},

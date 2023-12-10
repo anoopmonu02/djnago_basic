@@ -1,15 +1,15 @@
-from home.models import Student
+#from home.models import Student
 import time
 from django.core.mail import send_mail,EmailMessage
 from django.conf import settings
 import smtplib
 
 #Send email only
-def send_email_client():
-    subject="TEST EMAIL"
+def send_email_client(subject, message, fromEmail, to_list):
+    """ subject="TEST EMAIL"
     message="Test EMAIL"
     fromEmail = settings.EMAIL_HOST_USER
-    to_list = ['anoopmonu02@gmail.com']
+    to_list = ['anoopmonu02@gmail.com'] """
     send_mail(subject, message, fromEmail, to_list)
 
 #Send Email with Attachment
