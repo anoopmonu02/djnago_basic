@@ -25,6 +25,9 @@ urlpatterns = [
     path('login/',login_page,name='login_page'),
     path('logout/',logout_page,name='logout_page'),
 
+    #path('query/', ormMethodSample, name='query'),
+    path('query/', ormMethodSample1, name='query'),
+
     path('register/',register,name='register'),
     path('contact/',contact,name='contact'),
     path('delete_contact/<id>/',delete_contact,name='delete_contact'),

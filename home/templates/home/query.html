@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block start %}
+
+{{data}}
+
+{% for i in data %}
+    <div>Student Name: {{i.student_name}} - {{i.student_age}}</div>
+{% endfor %}
+
+
+{% endblock %}

@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from django.db import connection
 from django.db.models import Q, Sum
 import smtplib
 from .utils import *
@@ -242,3 +243,27 @@ def see_marks(request, student_id):
     
 
     return render(request, "report/see_marks.html", {"qs":qs,"total_marks":total_marks})
+
+
+def ormMethodSample(request):
+    data = Student.objects.all()
+    print(data.query) # to return sql query
+    print(f"---------------------------------{data}")
+    #It Will return qry details like time execution time, query etc.
+    print(connection.queries)
+    
+    return render(request, "home/query.html",{"data":data})
+
+# OR Qry Example using Q
+def ormMethodSample1(request):
+    data = Student.objects.filter(
+        Q(student_name__startswith="Alex") | ~Q(student_age__gt=30)
+        )
+     
+    print(data.query) # to return sql query
+    print(f"---------------------------------{data}")
+    #It Will return qry details like time execution time, query etc.
+    print(connection.queries)
+
+    # OR Qry Example using Q
+    return render(request, "home/query.html",{"data":data})
