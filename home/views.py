@@ -267,3 +267,17 @@ def ormMethodSample1(request):
 
     # OR Qry Example using Q
     return render(request, "home/query.html",{"data":data})
+
+# And Qry Example using Q
+def ormMethodSample2(request):
+    #And operation
+    data = Student.objects.filter(student_name__startswith="Alex") & Student.objects.filter(student_age=22)
+    #And operation using Q
+    data = Student.objects.filter(Q(student_name__startswith="Alex") & Q(student_age__gt=22))
+    print(data.query) # to return sql query
+    print(f"---------------------------------{data}")
+    #It Will return qry details like time execution time, query etc.
+    print(connection.queries)
+
+    # OR Qry Example using Q
+    return render(request, "home/query.html",{"data":data})
