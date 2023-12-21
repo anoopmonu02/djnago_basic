@@ -279,5 +279,52 @@ def ormMethodSample2(request):
     #It Will return qry details like time execution time, query etc.
     print(connection.queries)
 
-    # OR Qry Example using Q
+    return render(request, "home/query.html",{"data":data})
+
+# Union Qry Example
+def ormMethodSample3(request):
+    data = Subject.objects.all().values_list("subject_name").union(Car.objects.all().values_list("car_name"))
+    
+    print(data.query) # to return sql query
+    print(f"---------------------------------{data}")
+    #It Will return qry details like time execution time, query etc.
+    print(connection.queries)
+
+    return render(request, "home/query.html",{"data":data})
+
+# Not Qry Example
+def ormMethodSample4(request):
+    #Not operation may handle via exclude or filter ~Q
+    data = Student.objects.filter(~Q(student_name__icontains="alex"))
+    
+    print(data.query) # to return sql query
+    print(f"---------------------------------{data}")
+    #It Will return qry details like time execution time, query etc.
+    print(connection.queries)
+
+    return render(request, "home/query.html",{"data":data})
+
+
+# Simple Qry Field Selection Example
+def ormMethodSample5(request):
+    data = Student.objects.filter(student_age__gte=25).only('student_name','student_age')
+    
+    print(data.query) # to return sql query
+    print(f"---------------------------------{data}")
+    #It Will return qry details like time execution time, query etc.
+    print(connection.queries)
+
+    return render(request, "home/query.html",{"data":data})
+
+
+# Simple raw Qry Example
+def ormMethodSample6(request):
+    qry = "SELECT * FROM home_student WHERE student_age>=35"
+    data = Student.objects.raw(qry)
+    
+    print(data.query) # to return sql query
+    print(f"---------------------------------{data}")
+    #It Will return qry details like time execution time, query etc.
+    print(connection.queries)
+
     return render(request, "home/query.html",{"data":data})

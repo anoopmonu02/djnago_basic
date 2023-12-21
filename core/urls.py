@@ -27,7 +27,11 @@ urlpatterns = [
 
     #path('query/', ormMethodSample, name='query'),
     #path('query/', ormMethodSample1, name='query'),
-    path('query/', ormMethodSample2, name='query'),
+    #path('query/', ormMethodSample2, name='query'),
+    #path('query/', ormMethodSample3, name='query'),
+    #path('query/', ormMethodSample4, name='query'),
+    #path('query/', ormMethodSample5, name='query'),
+    path('query/', ormMethodSample6, name='query'),
 
     path('register/',register,name='register'),
     path('contact/',contact,name='contact'),
