@@ -31,7 +31,8 @@ urlpatterns = [
     #path('query/', ormMethodSample3, name='query'),
     #path('query/', ormMethodSample4, name='query'),
     #path('query/', ormMethodSample5, name='query'),
-    path('query/', ormMethodSample6, name='query'),
+    #path('query/', ormMethodSample6, name='query'),
+    path('query/', ormMethodSample7, name='query'),
 
     path('register/',register,name='register'),
     path('contact/',contact,name='contact'),

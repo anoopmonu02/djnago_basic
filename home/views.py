@@ -320,9 +320,23 @@ def ormMethodSample5(request):
 # Simple raw Qry Example
 def ormMethodSample6(request):
     qry = "SELECT * FROM home_student WHERE student_age>=35"
-    data = Student.objects.raw(qry)
+    data = Student.objects.raw(qry)[:5]
     
-    print(data.query) # to return sql query
+    #print(data.query) # to return sql query
+    print(f"---------------------------------{data}")
+    #It Will return qry details like time execution time, query etc.
+    print(connection.queries)
+
+    return render(request, "home/query.html",{"data":data})
+
+# Bypass ORM Example
+def ormMethodSample7(request):
+    cursor = connection.cursor()
+    qry = "SELECT count(*) FROM home_student"
+    #data = Student.objects.raw(qry)[:5]
+    cursor.execute(qry)
+    data = cursor.fetchone()
+    #print(data.query) # to return sql query
     print(f"---------------------------------{data}")
     #It Will return qry details like time execution time, query etc.
     print(connection.queries)
