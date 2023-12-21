@@ -342,3 +342,24 @@ def ormMethodSample7(request):
     print(connection.queries)
 
     return render(request, "home/query.html",{"data":data})
+
+def dictFetchAll(cursor):
+    desc = cursor.description
+    return [
+        dict(zip([col[0] for col in desc], row))
+        for row in cursor.fetchall()
+    ]
+
+# Bypass ORM Example fetchAll 
+def ormMethodSample8(request):
+    cursor = connection.cursor()
+    qry = "SELECT * FROM home_student WHERE student_age>=35 and department_id=3"
+    cursor.execute(qry)
+    #data = cursor.fetchall()
+    data  = dictFetchAll(cursor)
+    #print(data.query) # to return sql query
+    print(f"---------------------------------{data}")
+    #It Will return qry details like time execution time, query etc.
+    print(connection.queries)
+
+    return render(request, "home/query.html",{"data":data})
