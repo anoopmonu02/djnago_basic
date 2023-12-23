@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -19,6 +20,7 @@ class PhoneBook(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=100)
     age = models.IntegerField()
+    slug = models.SlugField(unique=True, null=True)
     dob = models.DateField(blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     mobile = models.CharField(max_length=11, null=True, blank=True)
@@ -26,6 +28,12 @@ class PhoneBook(models.Model):
     anniversary = models.DateField(blank=True, null=True)
     status = models.IntegerField(default=1)
     is_deleted = models.BooleanField(default=False)
+
+    """ def save(self, force_insert: bool = ..., force_update: bool = ..., using: str | None = ..., update_fields: Iterable[str] | None = ...) -> None:
+        return super().save(force_insert, force_update, using, update_fields) """
+    def save(self, *args, **kwargs):
+        self.slug = generate_slug(self.name)
+        super(PhoneBook, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name 

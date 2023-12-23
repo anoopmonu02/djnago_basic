@@ -70,7 +70,7 @@ def contact(request):
         categories = Category.objects.get(id=categoryId)
         anniversary_data = data.get('anniversary')
         aniDate = None
-        if anniversary_data:
+        """ if anniversary_data:
             try:
                 aniDate = datetime.strptime(anniversary_data, '%Y-%m-%d').date()                
             except ValueError:
@@ -78,7 +78,7 @@ def contact(request):
                 # You might want to log an error or handle it in a way that makes sense for your application
                 pass
         else:
-            aniDate = None
+            aniDate = None """
         print(categories)
         print(aniDate)
         PhoneBook.objects.create(
@@ -88,7 +88,7 @@ def contact(request):
             email = data.get('email'),
             mobile = data.get('mobile'),
             category = categories,
-            anniversary = aniDate
+            anniversary = anniversary_data
         )
         return redirect("/contact/", context)
     
@@ -130,8 +130,8 @@ def delete_contact(request, id):
     return redirect("/contact/")
 
 @login_required
-def update_contact(request, id):
-    updateContactObj = PhoneBook.objects.get(id=id)
+def update_contact(request, slug):
+    updateContactObj = PhoneBook.objects.get(slug=slug)
     Categories = Category.objects.all()
     print(request.method)
     if request.method == "POST":

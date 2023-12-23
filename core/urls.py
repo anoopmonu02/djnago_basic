@@ -38,7 +38,7 @@ urlpatterns = [
     path('register/',register,name='register'),
     path('contact/',contact,name='contact'),
     path('delete_contact/<id>/',delete_contact,name='delete_contact'),
-    path('update_contact/<id>/',update_contact,name='update_contact'),
+    path('update_contact/<slug>/',update_contact,name='update_contact'),
     path("contacts/", contacts,name='contact_list'),
 
     path('students/', get_student_data, name='get_student_data'),

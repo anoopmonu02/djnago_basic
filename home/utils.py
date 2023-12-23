@@ -4,6 +4,9 @@ from django.core.mail import send_mail,EmailMessage
 from django.conf import settings
 import smtplib
 
+from django.utils.text import slugify
+import uuid
+
 #Send email only
 def send_email_client(subject, message, fromEmail, to_list):
     """ subject="TEST EMAIL"
@@ -22,3 +25,14 @@ def send_email_with_attachment(subject, message, to_list, file_path):
     mail = EmailMessage(subject=subject, body=message, from_email=fromEmail, to=to_list)
     mail.attach_file(file_path)
     mail.send()
+
+def generate_slug(title:str)->str:
+    from .models import PhoneBook
+
+    """ A function to generate a slug """
+    title = slugify(title)
+
+    while(PhoneBook.objects.filter(slug=title).exists()):
+        title = f'{slugify(title)}-{str(uuid.uuid4())[:4]}'
+    
+    return title
